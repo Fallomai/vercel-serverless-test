@@ -6,5 +6,5 @@
     }
   },
   "buildCommand": null,
-  "outputDirectory": "."
+  "outputDirectory": "dist"
 }

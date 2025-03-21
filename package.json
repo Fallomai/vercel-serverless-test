@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx watch dev-server.ts",
     "vercel-dev": "vercel dev",
-    "build": "tsc",
+    "build": "tsc --outDir dist",
     "start": "node api/index.js",
     "lint": "eslint \"api/**/*.ts*\"",
     "check-types": "tsc --noEmit"

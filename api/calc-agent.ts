@@ -22,29 +22,21 @@ export default async function POST(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: "Missing input" });
     }
 
-    // const responseSchema = z.object({
-    //   finalNumber: z.number(),
-    // });
-
     const calculatorAgent = createAgent({
-      instructions: `You are a calculator agent that helps users perform mathematical calculations.
-    ONLY PLAN ONE ACTION AT A TIME..`,
+      instructions: `You are a calculator agent that helps users perform mathematical calculations.`,
       actions: [sum, minus, multiply, divide],
       model: openai("gpt-4o-mini"),
       spinApiKey: process.env.SPINAI_API_KEY,
       agentId: "vercel-calculator-agent",
-      // customLoggingEndpoint: "http://0.0.0.0:8000/log",
     });
 
     // (Step 4) Run the Agent
-    const { response, messages } = await calculatorAgent({
+    const { response } = await calculatorAgent({
       input,
     });
 
-    console.log({ messages });
-
     // (Step 5) Send Response
-    return res.status(200).json({ response, messages });
+    return res.status(200).json({ response });
   } catch (error) {
     console.error("Agent Error:", error);
     return res.status(500).json({ error: "Internal Server Error" });
